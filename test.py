@@ -1,13 +1,14 @@
 import openai
 import aiogram
-import config
+import os
+from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-
-openai.api_key = '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'
-bot = Bot(token=config.TOKEN)
+load_dotenv()
+openai.api_key = os.getenv('OPEN_AI_TOKEN')
+bot = Bot(token=os.getenv('TOKEN'))
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 
