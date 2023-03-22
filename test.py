@@ -3,6 +3,7 @@ openai.api_key = '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'
 aaa = input()
 messages = []
 who_is = input("Кем будет являться чат GPT в данном диалоге: ")
+print("Изменения")
 while True:
     content = input("User: ")
     messages.append({"role": "assistant", "content": who_is})
@@ -22,6 +23,7 @@ while True:
 # )
 #
 # print(response["data"][0]["url"])
+
 
 
 # @dp.message_handler(commands=['start'])
