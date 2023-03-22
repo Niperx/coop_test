@@ -36,7 +36,7 @@ async def start(message: types.Message, state: FSMContext):
     if some_info:
         messages.append({"role": "system", "content": f'Представь что ты {some_info}'})
     await state.update_data(info=messages)
-    await message.answer("Разговорный бот, пиши что хочешь")
+    await message.answer("Роль назначена, пишите свои вопросы")
 
 
 @dp.message_handler(content_types=['text'])
