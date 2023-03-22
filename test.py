@@ -1,11 +1,12 @@
 import openai
 import aiogram
 import os
-from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from dotenv import load_dotenv
+
 load_dotenv()
 openai.api_key = os.getenv('OPEN_AI_TOKEN')
 bot = Bot(token=os.getenv('TOKEN'))
@@ -24,13 +25,16 @@ def get_answer(input_text, messages):
         messages=messages
     )
     chat_response = completion.choices[0].message.content
-    messages.append({"role": "assistant", "content": chat_response})
+    messages.append({"role": "system", "content": chat_response})
     return messages
 
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message, state: FSMContext):
     messages = []
+    some_info = message.get_args()
+    if some_info:
+        messages.append({"role": "system", "content": f'Представь что ты {some_info}'})
     await state.update_data(info=messages)
     await message.answer("Разговорный бот, пиши что хочешь")
 
